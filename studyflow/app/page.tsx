@@ -1,10 +1,13 @@
-import { Button } from "@/components/ui/button";
+import Features from "@/components/core/Features";
+import Home from "../components/core/Home";
+import PreviewSection from "@/components/core/Preview";
 
-export default function Home() {
+export default function page() {
   return (
     <div>
-      <h1>Hello world</h1>
-      <Button>Hello world</Button>
+      <Home />
+      <Features />
+      <PreviewSection />
     </div>
   );
 }
