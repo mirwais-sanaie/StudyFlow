@@ -36,13 +36,15 @@ export default function PreviewSection() {
         transition={{ duration: 0.8 }}
         className="flex justify-center"
       >
-        <Card className="overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 max-w-5xl">
-          <div className="relative w-full h-[350px] md:h-[500px] lg:h-[600px]">
+        <Card className="overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 max-w-5xl w-full">
+          <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]">
             <Image
-              src="/data-dashboard.png" // local public folder image
+              src="/data-dashboard.png"
               alt="App Dashboard Preview"
               fill
-              className="object-cover rounded-2xl"
+              priority
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px"
             />
           </div>
         </Card>

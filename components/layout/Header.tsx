@@ -1,3 +1,4 @@
+import { ModeToggle } from "../core/ThemeToggler";
 import Navbar from "./Navbar";
 
 function Header() {
@@ -12,7 +13,7 @@ function Header() {
       </div>
       <div className="flex items-center gap-3">
         {/* <ThemeToggle /> */}
-        <p>ThemeToggler</p>
+        <ModeToggle />
         {/* <NotificationButton /> */}
         <p>Notif</p>
         {/* <UserMenu /> */}
