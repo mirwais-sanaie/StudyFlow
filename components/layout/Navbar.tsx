@@ -1,6 +1,11 @@
 import Link from "next/link";
 
-function Navbar() {
+type Props = {
+  className?: string;
+  onLinkClick?: () => void;
+};
+
+function Navbar({ className = "", onLinkClick }: Props) {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Planner", href: "/planner" },
@@ -11,13 +16,22 @@ function Navbar() {
   ];
 
   return (
-    <div>
-      {navLinks.map((link) => (
-        <Link key={link.href} href={link.href} className="mr-4">
-          {link.name}
-        </Link>
-      ))}
-    </div>
+    <nav className={className}>
+      <ul className="flex m-0 p-0 list-none flex-row md:flex-row md:items-center gap-7">
+        {navLinks.map((link) => (
+          <li key={link.href}>
+            <Link
+              href={link.href}
+              className="block text-sm hover:opacity-74 
+              "
+              onClick={() => onLinkClick && onLinkClick()}
+            >
+              {link.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 
