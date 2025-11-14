@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type Props = {
   className?: string;
@@ -6,6 +8,8 @@ type Props = {
 };
 
 function Navbar({ className = "", onLinkClick }: Props) {
+  const pathName = usePathname();
+
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Planner", href: "/planner" },
@@ -22,8 +26,9 @@ function Navbar({ className = "", onLinkClick }: Props) {
           <li key={link.href}>
             <Link
               href={link.href}
-              className="block text-sm hover:opacity-74 
-              "
+              className={`${
+                pathName === link.href ? "border-b border-primary" : ""
+              } block text-sm hover:opacity-74`}
               onClick={() => onLinkClick && onLinkClick()}
             >
               {link.name}

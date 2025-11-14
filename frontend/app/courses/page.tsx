@@ -1,4 +1,5 @@
 function page() {
+  const;
   return (
     <div>
       <h1>Courses</h1>
