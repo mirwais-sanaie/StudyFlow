@@ -1,11 +1,14 @@
 const express = require("express");
 const app = express();
-const PORT = 5000;
+const courseRouter = require("./routes/courseRouter");
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+//Middleware
+app.use(express.json());
 
-app.listen(PORT, () => {
-  console.log("start back studyFlow");
-});
+// app.get("/", (req, res) => {
+//   res.send("Welcome to StudyFlow API");
+// });
+
+app.use("/api/v1/courses", courseRouter);
+
+module.exports = app;
