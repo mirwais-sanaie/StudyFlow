@@ -1,11 +1,9 @@
 import { Spinner } from "@/components/ui/spinner";
 
-function loading() {
+export default function Loading() {
   return (
-    <div className="grid items-center justify-center mt-20">
+    <div className="fixed inset-0 flex items-center justify-center">
       <Spinner />
     </div>
   );
 }
-
-export default loading;

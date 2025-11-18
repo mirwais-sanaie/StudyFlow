@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -24,7 +23,7 @@ export default function FilterSidebar() {
   const [price, setPrice] = useState([50]);
 
   return (
-    <aside className="w-72 border-r  shadow-sm p-4 flex flex-col gap-6">
+    <aside className="w-72 h-full border-r  shadow-sm p-4 flex flex-col gap-6">
       {/* Header */}
       <div>
         <h2 className="text-xl font-bold mb-1">Filters</h2>

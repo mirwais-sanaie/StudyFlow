@@ -6,7 +6,12 @@ const {
 
 const router = express.Router();
 
-router.use("/", getAllCourses);
-router.use("/:id", getCourse);
+router.param("id", (req, res, next, val) => {
+  console.log(`Course id is : ${val}`);
+  next();
+});
+
+router.route("/").get(getAllCourses);
+router.route("/:id").get(getCourse);
 
 module.exports = router;

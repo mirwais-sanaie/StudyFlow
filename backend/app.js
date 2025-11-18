@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
 const courseRouter = require("./routes/courseRouter");
+const morgan = require("morgan");
+
+app.use(express.json());
+app.use(morgan("dev"));
 
 //Middleware
-app.use(express.json());
 
 // app.get("/", (req, res) => {
 //   res.send("Welcome to StudyFlow API");
