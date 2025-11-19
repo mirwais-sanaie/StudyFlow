@@ -5,9 +5,23 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "images.klipfolio.com",
-        port: "", // optional
-        pathname: "/**", // allow all image paths from this domain
+        hostname: "encrypted-tbn0.gstatic.com",
+      },
+      {
+        protocol: "https",
+        hostname: "miro.medium.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.freepik.com",
+      },
+      {
+        protocol: "https",
+        hostname: "colorlib.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.prismic.io",
       },
     ],
   },

@@ -1,21 +1,17 @@
-"use client";
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star, Clock, Layers, User } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-function getCourseById(id: string) {
-  return courses.find((c: any) => c.id === id);
-}
-
-export default function CourseDetailPage({
+export default async function CourseDetailPage({
   params,
 }: {
   params: Promise<{ courseId: string }>;
 }) {
-  const course = getCourseById(params.courseId);
+  const { courseId } = await params;
+  const res = await fetch(`http://127.0.0.1:5000/api/v1/courses/${courseId}`);
+  const { data: course } = await res.json();
 
   if (!course) return notFound();
 
@@ -24,11 +20,14 @@ export default function CourseDetailPage({
       {/* Header Image */}
       <div className="relative w-full h-64 md:h-80 overflow-hidden rounded-2xl shadow">
         <Image
-          src={course.image}
-          alt={course.title}
+          src={course.image || "/courses/default-course.jpg"}
+          alt={course.title || "Course Image"}
           fill
           className="object-cover"
           priority
+          quality={100}
+          placeholder="blur"
+          blurDataURL="/courses/default-course.jpg"
         />
       </div>
 

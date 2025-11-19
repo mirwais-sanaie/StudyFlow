@@ -1,5 +1,5 @@
 "use client";
-import { Bell, User2Icon, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { ModeToggle } from "../core/ThemeToggler";
 import Navbar from "./Navbar";
@@ -30,13 +30,11 @@ function Header() {
         </button>
 
         <ModeToggle />
-        <Bell width={25} height={25} />
-        <User2Icon width={25} height={25} />
       </div>
 
       {/* Mobile dropdown menu */}
       {mobileOpen && (
-        <div className="md:hidden absolute left-0 right-0 top-full bg-background border-b shadow-md z-50">
+        <div className="md:hidden h-full w-65 absolute left-0 top-0 bg-background shadow-md z-50">
           <Navbar
             className="flex flex-col p-4"
             onLinkClick={() => setMobileOpen(false)}
