@@ -21,13 +21,13 @@ function Navbar({ className = "", onLinkClick }: Props) {
 
   return (
     <nav className={className}>
-      <ul className="flex m-0 p-0 list-none flex-row md:flex-row md:items-center gap-7">
+      <ul className="flex flex-col m-0 p-0 list-none md:flex-row md:items-center gap-7">
         {navLinks.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
               className={`${
-                pathName === link.href ? "border-b border-primary" : ""
+                pathName === link.href ? "inline border-b border-primary" : ""
               } block text-sm hover:opacity-74`}
               onClick={() => onLinkClick && onLinkClick()}
             >

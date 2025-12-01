@@ -34,7 +34,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       </div>
 
       {/* Main Content */}
-      <main className="p-5 md:ml-0 w-full">{children}</main>
+      <main className="md:ml-0 md:px-7 w-full">{children}</main>
     </div>
   );
 }

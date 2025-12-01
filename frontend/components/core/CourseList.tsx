@@ -51,7 +51,9 @@ export default function CoursesList({
             <CourseCard key={course.id} course={course} />
           ))
         ) : (
-          <p className="text-center text-muted-foreground">No courses found.</p>
+          <p className="text-center text-muted-foreground/80 mt-5 col-span-12">
+            No courses found.
+          </p>
         )}
       </ul>
     </>

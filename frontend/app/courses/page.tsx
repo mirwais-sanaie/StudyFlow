@@ -7,7 +7,7 @@ async function page() {
   const { data } = await res.json();
 
   return (
-    <div className="my-12 mx-1 w-full">
+    <div className="my-12 w-full">
       <div className="text-center my-10 max-w-xl mx-auto">
         <h1 className="mb-4 text-3xl font-bold">Courses</h1>
         <p className="text-primary text-[15px]">
