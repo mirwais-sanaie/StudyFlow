@@ -2,9 +2,12 @@ const express = require("express");
 const app = express();
 const courseRouter = require("./routes/courseRouter");
 const morgan = require("morgan");
+const connectDB = require("./configs/database");
 
 app.use(express.json());
 app.use(morgan("dev"));
+
+connectDB();
 
 //Middleware
 
