@@ -1,7 +1,41 @@
 const Course = require("./../models/courseModel");
 
 exports.getAllCourses = async (req, res) => {
-  const courses = await Course.find();
+  // 1) Filtering
+  const queryObj = { ...req.query };
+  const expludes = ["page", "limit", "sort", "fields"];
+  expludes.forEach((el) => delete req.query[el]);
+  console.log(queryObj);
+
+  // 2) Advanced filtering (gte, gt, lte, lt)
+  let queryStr = JSON.stringify(queryObj);
+  queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+  let query = Course.find(JSON.parse(queryStr));
+
+  // 3) Sorting
+  if (req.query.sort) {
+    const sortBy = req.query.sort.split(",").join(" ");
+    console.log(sortBy);
+    query = query.sort(sortBy);
+  } else {
+    query = query.sort("-createdAt");
+  }
+
+  // 4) field limiting
+  if (req.query.fields) {
+    const fields = req.query.fields.split(",").join(" ");
+    query = query.select(fields);
+  } else {
+    query = query.select("-__v");
+  }
+
+  // 5) pagination
+  const page = req.query.page * 1 || 1;
+  const limit = req.query.limit * 1 || 10;
+  const skip = (page - 1) * limit;
+  query = query.skip(skip).limit(limit);
+
+  const courses = await query;
 
   res.status(200).json({
     status: "success",
@@ -80,7 +114,7 @@ exports.updateCourse = async (req, res) => {
 exports.deleteCourse = async (req, res) => {
   try {
     const id = req.params.id;
-    const course = await Course.findByIdAndDelete(id);
+    await Course.findByIdAndDelete(id);
 
     res.status(204).json({
       status: "success",
