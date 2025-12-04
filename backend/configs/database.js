@@ -6,10 +6,11 @@ const connectDB = async function () {
   );
 
   try {
-    const conn = await mongoose.connectDB(DB);
+    const conn = await mongoose.connect(DB);
     console.log("connection is connected " + conn.connection.host);
   } catch (error) {
     console.log(error.message);
+    process.exit(1);
   }
 };
 

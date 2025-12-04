@@ -1,15 +1,21 @@
 const express = require("express");
-const app = express();
-const courseRouter = require("./routes/courseRouter");
 const morgan = require("morgan");
 const connectDB = require("./configs/database");
+const courseRouter = require("./routes/courseRouter");
 
+const app = express();
 app.use(express.json());
-app.use(morgan("dev"));
-
 connectDB();
 
-//Middleware
+// Middleware
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
+app.use((req, res, next) => {
+  console.log("Hello from the middleware 👋");
+  next();
+});
 
 // app.get("/", (req, res) => {
 //   res.send("Welcome to StudyFlow API");
