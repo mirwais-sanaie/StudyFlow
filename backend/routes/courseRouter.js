@@ -5,6 +5,7 @@ const {
   getCourse,
   updateCourse,
   deleteCourse,
+  aliasTopCourses,
 } = require("./../controllers/courseController");
 
 const router = express.Router();
@@ -13,6 +14,8 @@ const router = express.Router();
 //   console.log(`Course id is : ${val}`);
 //   next();
 // });
+
+router.route("/top-5-cheap").get(getAllCourses, aliasTopCourses);
 
 router.route("/").get(getAllCourses).post(createCourse);
 router.route("/:id").get(getCourse).patch(updateCourse).delete(deleteCourse);

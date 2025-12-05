@@ -1,5 +1,12 @@
 const Course = require("./../models/courseModel");
 
+exports.aliasTopCourses = async (req, res, next) => {
+  req.query.limit = "5";
+  req.query.sort = "-ratingsAverage,price";
+  req.query.fields = "title,price,ratingsAverage,summary,difficulty";
+  next();
+};
+
 exports.getAllCourses = async (req, res) => {
   // 1) Filtering
   const queryObj = { ...req.query };
