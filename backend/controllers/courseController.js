@@ -7,22 +7,40 @@ exports.aliasTopCourses = async (req, res, next) => {
   next();
 };
 
-exports.getAllCourses = async (req, res) => {
-  // 1) Filtering
-  const queryObj = { ...req.query };
-  const expludes = ["page", "limit", "sort", "fields"];
-  expludes.forEach((el) => delete req.query[el]);
-  console.log(queryObj);
+class APIFeatures {
+  constructor(query, queryString) {
+    this.query = query;
+    this.queryString = queryString;
+  }
 
-  // 2) Advanced filtering (gte, gt, lte, lt)
-  let queryStr = JSON.stringify(queryObj);
-  queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-  let query = Course.find(JSON.parse(queryStr));
+  filter() {
+    // 1) Filtering
+    const queryObj = { ...this.queryString };
+    const expludes = ["page", "limit", "sort", "fields"];
+    expludes.forEach((el) => delete queryObj[el]);
+
+    // 2) Advanced filtering (gte, gt, lte, lt)
+    let queryStr = JSON.stringify(queryObj);
+    queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+    this.query.find(JSON.parse(queryStr));
+  }
+}
+
+exports.getAllCourses = async (req, res) => {
+  //Build query
+  // 1) Filtering
+  // const queryObj = { ...req.query };
+  // const expludes = ["page", "limit", "sort", "fields"];
+  // expludes.forEach((el) => delete queryObj[el]);
+
+  // // 2) Advanced filtering (gte, gt, lte, lt)
+  // let queryStr = JSON.stringify(queryObj);
+  // queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+  // let query = Course.find(JSON.parse(queryStr));
 
   // 3) Sorting
   if (req.query.sort) {
     const sortBy = req.query.sort.split(",").join(" ");
-    console.log(sortBy);
     query = query.sort(sortBy);
   } else {
     query = query.sort("-createdAt");
@@ -42,6 +60,7 @@ exports.getAllCourses = async (req, res) => {
   const skip = (page - 1) * limit;
   query = query.skip(skip).limit(limit);
 
+  const feature = new APIFeatures(Course.find, req.query);
   const courses = await query;
 
   res.status(200).json({
