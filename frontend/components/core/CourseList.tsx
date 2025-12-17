@@ -48,7 +48,7 @@ export default function CoursesList({
       <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {courses && courses.length > 0 ? (
           courses.map((course) => (
-            <CourseCard key={course.id} course={course} />
+            <CourseCard key={course._id} course={course} />
           ))
         ) : (
           <p className="text-center text-muted-foreground/80 mt-5 col-span-12">

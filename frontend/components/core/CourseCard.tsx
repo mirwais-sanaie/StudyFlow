@@ -5,7 +5,7 @@ import { CourseType } from "@/types/courseTypes";
 
 function CourseCard({ course }: { course: CourseType }) {
   return (
-    <Link href={`/courses/${course.id}`} className="block group">
+    <Link href={`/courses/${course._id}`} className="block group">
       <Card className="overflow-hidden my-0 pt-0 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300">
         {/* Image */}
         <div className="relative h-48 w-full overflow-hidden">
@@ -44,7 +44,7 @@ function CourseCard({ course }: { course: CourseType }) {
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 pt-2">
-            {course.tags.map((tag) => (
+            {course?.tags?.map((tag) => (
               <span key={tag} className="text-xs bg-muted px-2 py-1 rounded-md">
                 {tag}
               </span>

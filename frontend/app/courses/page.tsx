@@ -16,7 +16,7 @@ async function page() {
         </p>
       </div>
 
-      <CoursesList initialCourses={data} />
+      <CoursesList initialCourses={data?.courses} />
     </div>
   );
 }
